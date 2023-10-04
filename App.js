@@ -1,12 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { styles } from './assets/estilos/alistyle';
-import Loguin from './componentes/Loguin'
+import Loguin from './componentes/Loguin';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './componentes/HomeScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Loguin/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName='Login'
+      >
+        <Stack.Screen name="login" component={Loguin}/>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>  
+    </NavigationContainer>
   );
 }
 
