@@ -8,7 +8,7 @@ import {initializeApp} from 'firebase/app';
 import {firebaseConfig} from '../firebaseconfig';
 
 export default function Loguin({navigation}){
-    const [email, setEmmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [showPass,setShowpass] = useState(false)
@@ -22,6 +22,7 @@ export default function Loguin({navigation}){
         createUserWithEmailAndPassword(auth,email,password)
         .then((userCredential)=>{
             //console.log(userCredential.user.providerData)
+            setMessageColor(true)
             setMessage("Cuenta creada correctamente ...")
         })
         .catch((errror)=>{
@@ -33,11 +34,14 @@ export default function Loguin({navigation}){
     const handleSignIn = ()=>{
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential)=>{
-            console.log("Conexion exitosa...");
+            setEmmail("");
+            setPassword("");
+            //console.log("Conexion exitosa...");
             navigation.navigate('Home', {email:email})
         })
         .catch((error)=>{
-            console.log(error.message)
+            //console.log(error.message)
+            setMessage("Usuario y/o contraseña invalida.");
             setMessageColor(false)
         })
     }
